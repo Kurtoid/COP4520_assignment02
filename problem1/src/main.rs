@@ -1,3 +1,14 @@
+/*
+ * The first prisoner/thread is designated as the representative thread.
+ * every time the representative thread is selected, it checks whether the cake
+ * has been eaten. If so, it requests a new cake, and increments an internal counter.
+ * All other threads, when entering the room, will only eat the cake
+ * if 1) they have not already eaten, and 2) there is cake availible.
+ * No thread besides the representative thread can request a new cake.
+ * Once the representative thread's counter has reached the number of participants,
+ * all threads have entered at least once.
+ * 
+ */
 use rand::prelude::*;
 use std::sync::{atomic::AtomicBool, mpsc, Arc, Mutex};
 fn main() {

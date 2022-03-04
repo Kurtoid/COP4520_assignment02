@@ -1,3 +1,15 @@
+/*
+ * Strategy 1 could work, but a failed attempt to enter the room while it's occupied
+ * could be (time) costly. Strategy 2 works as an extension to stratey 1:
+ * Strategy 2 makes the most sense. The sign, if considered as an
+ * atomic boolean, would allow any guest/thread to check it's state
+ * with very little cost/overhead. The queue in Strategy 3 means that 
+ * waiting threads either won't be able to accomplish other tasks
+ * while waiting, or that the room could spend time empty while the next
+ * queued task is ready to enter.
+ * 
+ * Here, I implement strategy 2
+ */
 use rand::prelude::*;
 use std::{sync::{atomic::AtomicBool, Arc}};
 fn main() {
